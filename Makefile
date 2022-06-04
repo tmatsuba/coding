@@ -1,7 +1,7 @@
 run:
 	./shell/run.sh
 
-base:
+b:
 	./shell/base.sh
 
 m:
