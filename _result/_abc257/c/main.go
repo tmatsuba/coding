@@ -15,7 +15,7 @@ func main() {
 	defer wr.Flush()
 	sc.Split(bufio.ScanWords)
 	sc.Buffer(make([]byte, 1001), 1001001)
-	sc.Split(bufio.ScanWords)
+
 	N := nextInt()
 	A := nextLine()
 
