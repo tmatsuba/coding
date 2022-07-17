@@ -11,29 +11,108 @@ import (
 )
 
 func main() {
-	var S string
-	fmt.Scan(&S)
+	sc.Split(bufio.ScanWords)
+	
+	N := nextInt()
+	X:= nextInt()
+	Y := nextInt()
+	Z := nextInt()
 
-	n := map[string]int{"a": 0, "b": 0, "c": 0, "d": 0, "e": 0, "f": 0, "g": 0, "h": 0, "i": 0, "j": 0, "k": 0, "l": 0, "m": 0, "n": 0, "o": 0, "p": 0, "q": 0, "r": 0, "s": 0, "t": 0, "u": 0, "v": 0, "w": 0, "x": 0, "y": 0, "z": 0}
-	ret := "None"
-	for _,v := range(S) {
-		n[string(v)]++
+	A := map[int]int{}
+	B := map[int]int{}
+	C := map[int]int{}
+
+	ret := []int{}
+
+	for i := 0; i < N; i++ {
+		A[i] = nextInt()
+	}
+	
+	a := List{}
+    for k, v := range A {
+        e := Entry{k, v}
+        a = append(a, e)
+    }
+	sort.Sort(a)
+
+	for i := 0; i < X; i++ {
+		ret = append(ret, a[i].id)
 	}
 
-	dict := make([]string, len(n))
-	index := 0
-	for key,_ := range(n) {
-		dict[index] = key
-		index++
+	for i := 0; i < N; i++ {
+		B[i] = nextInt()
 	}
-	sort.Strings(dict)
-	for _,v := range(dict) {
-		if n[v] == 0 {
-			ret = v
-			break
-		} 
+
+	b := List{}
+    for k, v := range B {
+        e := Entry{k, v}
+        b = append(b, e)
+    }
+	sort.Sort(b)
+
+	for i := 0; i < N; i++ {
+		skip := false
+		for _, v := range ret {
+			if v == b[i].id {skip = true}
+		}
+		if skip {continue} 
+		if Y <= 0 {break}
+		ret = append(ret, b[i].id)
+		Y--
 	}
-	fmt.Println(ret)
+
+	for i := 0; i < N; i++ {
+		C[i] = A[i] + B[i]
+	}
+
+	c := List{}
+    for k, v := range C {
+        e := Entry{k, v}
+        c = append(c, e)
+    }
+
+
+	sort.Sort(c)
+
+	for i := 0; i < N;i++ {
+		skip := false
+		for _, v := range ret {
+			if v == c[i].id {skip = true}
+ 		}
+		if skip {continue} 
+		if Z <= 0 {break}
+		ret = append(ret, c[i].id)
+		Z--
+	}
+
+	sort.Ints(ret)
+
+	for _, v := range ret {
+		fmt.Println(v + 1)
+	}
+}
+
+type Entry struct {
+    id  int
+    value int
+}
+
+type List []Entry
+
+func (l List) Len() int {
+    return len(l)
+}
+
+func (l List) Swap(i, j int) {
+    l[i], l[j] = l[j], l[i]
+}
+
+func (l List) Less(i, j int) bool {
+    if l[i].value == l[j].value {
+        return (l[i].id < l[j].id)
+    } else {
+        return (l[i].value > l[j].value)
+    }
 }
 
 var sc = bufio.NewScanner(os.Stdin)
