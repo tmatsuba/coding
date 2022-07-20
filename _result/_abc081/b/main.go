@@ -5,7 +5,34 @@ import (
 	"bufio"
 	"fmt"
 	"strconv"
+	"math"
+	"math/bits"
 )
+
+func main() {
+	sc.Split(bufio.ScanWords)
+	N := nextInt()
+	A := []int{}
+	ret := 0
+	
+	for i:=0;i<N;i++ {
+		A = append(A, nextInt())
+	}
+
+	mod := true
+	for mod == true {
+		for i,a := range A {
+			if a % 2 != 0 {
+				mod = false
+				break
+			}
+			A[i] = a / 2
+		}
+		if mod {ret++}
+	}
+	fmt.Println(ret)
+}
+
 
 var sc = bufio.NewScanner(os.Stdin)
 
@@ -23,33 +50,52 @@ func nextInt() int {
     return i
 }
 
-func main() {
-	sc.Split(bufio.ScanWords)
-	n := nextInt()
-	a := make([]int, n)
-	i := 0
+func Max(x, y int) int {
+    if x < y {
+        return y
+    }
+    return x
+}
 
-	for n > i {
-		a[i] = nextInt()
-		i++
+func Min(x, y int) int {
+    if x > y {
+        return y
+    }
+    return x
+}
+
+func atoi(s string) int {
+	ret, e := strconv.Atoi(s)
+	if e != nil {
+		panic(e)
+	}
+	return ret
+}
+
+func pow(a, b int) int {
+	return int(math.Pow(float64(a), float64(b)))
+}
+
+func combination(set []string, n int) (subsets [][]string) {
+	length := uint(len(set))
+
+	if n > len(set) {
+		n = len(set)
 	}
 
-	ret := 0
-	for {
-		i = 0
-		odd := false
-		for n > i {
-			if a[i] % 2 != 0 {
-				odd = true
-				break
+	for subsetBits := 1; subsetBits < (1 << length); subsetBits++ {
+		if n > 0 && bits.OnesCount(uint(subsetBits)) != n {
+			continue
+		}
+
+		var subset []string
+
+		for object := uint(0); object < length; object++ {
+			if (subsetBits>>object)&1 == 1 {
+				subset = append(subset, set[object])
 			}
-			a[i] = a[i] / 2
-			i++
 		}
-		if odd {
-			break
-		}
-		ret++
+		subsets = append(subsets, subset)
 	}
-	fmt.Println(ret)
+	return subsets
 }
