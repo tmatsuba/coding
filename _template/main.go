@@ -6,9 +6,14 @@ import (
 	"fmt"
 	"strconv"
 	"math"
+	"math/bits"
 )
 
 func main() {
+	// buf := make([]byte, 1024*1024)
+	// sc.Buffer(buf, bufio.MaxScanTokenSize)
+	// sc.Split(bufio.ScanWords)
+
 	X := nextInt()
 	A := nextInt()
 	B := nextInt()
@@ -68,4 +73,28 @@ func atoi(s string) int {
 
 func pow(a, b int) int {
 	return int(math.Pow(float64(a), float64(b)))
+}
+
+func combination(set []string, n int) (subsets [][]string) {
+	length := uint(len(set))
+
+	if n > len(set) {
+		n = len(set)
+	}
+
+	for subsetBits := 1; subsetBits < (1 << length); subsetBits++ {
+		if n > 0 && bits.OnesCount(uint(subsetBits)) != n {
+			continue
+		}
+
+		var subset []string
+
+		for object := uint(0); object < length; object++ {
+			if (subsetBits>>object)&1 == 1 {
+				subset = append(subset, set[object])
+			}
+		}
+		subsets = append(subsets, subset)
+	}
+	return subsets
 }

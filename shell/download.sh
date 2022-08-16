@@ -1,5 +1,5 @@
 #!/bin/bash
-dir=$(cat ./contest)
+dir=$(head -n 1 ./contest)
 echo -e CONTEST: $dir
 echo -n QUESTION?
 read q
