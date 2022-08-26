@@ -63,6 +63,10 @@ func Min(x, y int) int {
     return x
 }
 
+func Abs(x int) int {
+	return int(math.Abs(float64(x)))
+}
+
 func atoi(s string) int {
 	ret, e := strconv.Atoi(s)
 	if e != nil {
