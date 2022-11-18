@@ -12,27 +12,19 @@ import (
 func main() {
 	// buf := make([]byte, 1024*1024)
 	// sc.Buffer(buf, bufio.MaxScanTokenSize)
-	sc.Split(bufio.ScanWords)
+	// sc.Split(bufio.ScanWords)
 
-	N := nextInt()
-	M := nextInt()
-	A := make([]int, N)
-	m := map[int]bool
+	S := nextLine()
 
-	for i:=0; i<N; i++ {
-		A[i] = nextInt()
-		m[i] = true
+	for i:=len(S)-1; i >= 0; i-- {
+		c := S[i]
+		if c == 'a' {
+			fmt.Println(i+1)
+			return
+		}
 	}
-
-	for _,a := range A {
-		c1 := a
-		c2 := (a+1) % M
-
-	}
-
+	fmt.Println(-1)
 }
-
-func recur(
 
 
 var sc = bufio.NewScanner(os.Stdin)
