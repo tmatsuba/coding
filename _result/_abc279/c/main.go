@@ -6,6 +6,7 @@ import (
 	"math"
 	"math/bits"
 	"os"
+	"sort"
 	"strconv"
 )
 
@@ -17,16 +18,22 @@ func main() {
 	H := nextInt()
 	W := nextInt()
 
-	ss_cnt := make([]int, H)
-	ts_cnt := make([]int, H)
+	SWi := make([][]rune, W)
+	TWi := make([][]rune, W)
+
+	for i := range SWi {
+		SWi[i] = make([]rune, H)
+	}
+
+	for i := range TWi {
+		TWi[i] = make([]rune, H)
+	}
 
 	for i:=0; i<H; i++ {
 		Si := nextLine()
-		
+
 		for j:=0; j<W; j++ {
-			if Si[j] == '#' {
-				ss_cnt[i]++
-			}
+			SWi[j][i] = rune(Si[j])
 		}
 	}
 
@@ -34,15 +41,25 @@ func main() {
 		Ti := nextLine()
 
 		for j:=0; j<W; j++ {
-
-			if Ti[j] == '#' {
-				ts_cnt[i]++
-			}
+			TWi[j][i] = rune(Ti[j])
 		}
 	}
-	
-	for i:=0; i<H; i++ {
-		if ss_cnt[i] != ts_cnt[i] {
+
+	arr_swi := make([]string, W)
+	for i, s := range SWi {
+		arr_swi[i] = string(s)
+	}
+
+	arr_twi := make([]string, W)
+	for i, s := range TWi {
+		arr_twi[i] = string(s)
+	}
+
+	sort.Strings(arr_swi)
+	sort.Strings(arr_twi)
+
+	for i:=0; i<W; i++ {
+		if arr_swi[i] != arr_twi[i] {
 			fmt.Println("No")
 			return
 		}
