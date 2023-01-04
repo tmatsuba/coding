@@ -7,12 +7,13 @@ import (
 	"strconv"
 	"math"
 	"math/bits"
+	"strings"
 )
 
 func main() {
-	// buf := make([]byte, 1024*1024)
-	// sc.Buffer(buf, bufio.MaxScanTokenSize)
-	// sc.Split(bufio.ScanWords)
+	buf := make([]byte, 1024*1024)
+	sc.Buffer(buf, bufio.MaxScanTokenSize)
+	sc.Split(bufio.ScanWords)
 
 	X := nextInt()
 	A := nextInt()
@@ -101,4 +102,8 @@ func combination(set []string, n int) (subsets [][]string) {
 		subsets = append(subsets, subset)
 	}
 	return subsets
+}
+
+func ArrayJoin(a []int, delim string) string {
+	return strings.Trim(strings.Replace(fmt.Sprint(a), " ", delim, -1), "[]")
 }
