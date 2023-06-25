@@ -15,38 +15,38 @@ func main() {
 	sc.Buffer(buf, bufio.MaxScanTokenSize)
 	sc.Split(bufio.ScanWords)
 
-	N,K  := nextInt(), nextInt()
-	S := make([]int, N)
-	ret := 0
+	N, K := nextInt(),nextInt()
+	s := make([]int, N)
 
 	for i:=0; i<N; i++ {
-		S[i] = nextInt()
-		if S[i] == 0 {
+		s[i] = nextInt()
+		if s[i] == 0 {
 			fmt.Println(N)
 			return
 		}
 	}
 
-	l:=0
-	r:=0
+	l, r := 0, 0
 	p := 1
+	ret := 0
+
 	for r < N {
-//		fmt.Println(p, S[r])
-		p = p * S[r]
-//		fmt.Println(l, r, p, ret)
+		p = p * s[r]
+
 		if p <= K {
 			ret = Max(ret, r-l+1)
 			r++
-			continue 
+			continue
 		} else {
 			for l < N {
-				p = p / S[l]
+				p = p / s[l]
+
 				if p <= K {
 					l++
-					r++ 
+					r++
 					break
-				} 
-
+				}
+				
 				if r <= l {
 					l++
 					r = l
@@ -57,6 +57,7 @@ func main() {
 			}
 		}
 	}
+
 	fmt.Println(ret)
 }
 
