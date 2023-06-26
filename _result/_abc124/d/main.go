@@ -33,13 +33,11 @@ func main() {
 		}
 	}
 
-	zero = false
 	k := K
 	cnt := 0
 	end := false
 	r:=0
 
-//	fmt.Println(starts)
 	for i:=0; i<len(starts); i++ {
 		zero = false
 		for j:=r; j<N; j++ {
@@ -55,7 +53,6 @@ func main() {
 			}
 
 			if k < 0 {
-//				fmt.Println(starts[i], j, "K: ", K, "k: ", k)
 				if 1 <= K {
 					k = 1
 				} else  {
@@ -63,7 +60,6 @@ func main() {
 				}
 				break
 			} else {
-//				fmt.Println(starts[i], j, k, j-starts[i]+1)
 				cnt = Max(cnt, j - starts[i] + 1)
 				r = j
 			}
@@ -73,205 +69,6 @@ func main() {
 			break
 		}
 	}
-
-
-	// l, r := 0, 0
-	// p := 1
-	// ret := 0
-
-	// for r < N {
-	// 	p = p * s[r]
-
-	// 	if p <= K {
-	// 		ret = Max(ret, r-l+1)
-	// 		r++
-	// 		continue
-	// 	} else {
-	// 		for l < N {
-	// 			p = p / s[l]
-
-	// 			if p <= K {
-	// 				l++
-	// 				r++
-	// 				break
-	// 			}
-				
-	// 			if r <= l {
-	// 				l++
-	// 				r = l
-	// 				p = 1
-	// 				break
-	// 			}
-	// 			l++
-	// 		}
-	// 	}
-	// }
-
-	// fmt.Println(ret)
-
-
-//	starts := []int{}
-
-	// lone := false
-	// zero := false
-	// rone := false
-	// lrs := [][]int{}
-
-
-
-	// next_l := 0
-	// lr := []int{}
-
-
-	// for i:=0; i<N; i++ {
-	// 	s := S[i]
-	// 	if lone && rone {
-	// 		if s == '0' {
-	// 			lr = append(lr, i-1)
-	// 			lrs = append(lrs, lr) 
-	// 			lone, zero, rone = false, false, false
-	// 			lr = []int{next_l}
-	// 		} 
-	// 	} else if lone && !rone {
-	// 		if s == '1' && !zero{
-	// 			rone = true
-	// 			next_l = i
-	// 		} else {
-	// 			zero = true
-	// 		}
-	// 	} else if !lone && !rone {
-	// 		lone = true
-	// 		lr = append(lr, i)
-	// 	} 
-
-	// 	if i == N-1 {
-	// 		lr = append(lr, i)
-	// 		lrs = append(lrs, lr) 
-	// 	}
-	// }
-
-	// fmt.Println(lrs)
-	// fmt.Println(K)
-	// 	if !zero {
-	// 		if s == '0' {
- 	// 			sum[i+1] = sum[i] + 1
-	// 			ret = Max(ret, cnt)
-	// 			cnt = 0
-	// 			zero = true
-	// 		} else {
-	// 			cnt++
-	// 			sum[i+1] = sum[i]
-	// 			zero = false
-	// 		}
-	// 	} else if zero {
-	// 		if s == '1' {
-	// 			starts = append(starts, i)
-	// 			cnt++
-	// 			zero = false
-	// 		} else {
-	// 			ret = Max(ret, cnt)
-	// 			cnt = 0
-	// 		}
-	// 		sum[i+1] = sum[i]
-	// 	}
-	// }
-
-	// if K == 0 {
-	// 	fmt.Println(ret)
-	// 	return
-	// }
-
-
-	// i,  next := 1, 1
-	// v := 0
-	
-	// for i<N+1 {
-	// 	if i != 1 {
-	// 		v = sum[i]
-	// 	}
-	// 	cnt := 0
-	// 	for j:=i; j<N+1; j++ {
-
-	// 		if (i != 0 && i == next && v != sum[j]) {
-	// 			next = j
-	// 		} else if j == N {
-	// 			next = j + 1
-	// 		}
-
-	// 		if sum[j] - v > K {
-	// 			break
-	// 		}
-	// 		cnt++
-	// 		fmt.Println("i:", i, "j:", j, "cnt: ", cnt)
-	// 	}
-
-
-	// 	ret = Max(ret, cnt)
-	// 	i = next
-	// }
-	
-	// for i:=1; i<len(sum); i++{
-	// 	if i == 0 {continue}
-	// 	if i + 1 >= len(sum) {break}
-
-	// 	if sum[i] < sum[i+1] {
-	// 		starts = append(starts, i)
-	// 	}
-	// }
-//	fmt.Println(sum)
-//	fmt.Println(starts)
-
-	// for i, start := range(starts) {
-	// 	end := start
-		
-
-
-	// 	for j:=i; j<len(starts); j++ {
-	// 		if starts[j] > 0  {
-	// 			end = starts[j] - 1
-	// 		} else {
-	// 			end = start
-	// 		}
-	// 		if sum[starts[j]] - sum[start] > K {
-	// 			ret = Max(ret, end - start)
-	// 			break
-	// 		}
-	// 	}
-	// }
-
-
-	// start := 0
-	// end := 0
-	// next := 0
-	// for end <= N {
-	// 	start = next
-	// 	zero := false
-	// 	k := K
-	// 	for i:=start; i<N; i++ {
-			
-	// 		if S[i] == '1' {
-	// 			if zero {
-	// 				k--
-	// 				if start == next {
-	// 					next = i
-	// 				}
-	// 			}
-	// 			zero = false
-	// 		} else {
-	// 			if !zero && k <= 0 {
-	// 				break
-	// 			}
-
-	// 			zero = true
-	// 		}
-	// 		end = i + 1
-	// 	}
-	// 	ret = Max(ret, end - start)
-
-	// 	if start == next {
-	// 		break
-	// 	}
-	// }
 
 	fmt.Println(cnt)
 }
